@@ -8,7 +8,6 @@ export default function handler(req, res) {
     'ads_read',
     'ads_management',
     'business_management',
-    'read_insights',
   ].join(',')
 
   const authUrl =
