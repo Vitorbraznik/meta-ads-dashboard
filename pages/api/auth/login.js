@@ -1,7 +1,8 @@
 export default function handler(req, res) {
   const appId = process.env.META_APP_ID || process.env.NEXT_PUBLIC_APP_ID
-  const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI ||
-    `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/api/auth/callback`
+  const proto = req.headers['x-forwarded-proto'] || 'https'
+  const host = req.headers['x-forwarded-host'] || req.headers.host
+  const redirectUri = `${proto}://${host}/api/auth/callback`
 
   const scope = [
     'ads_read',

@@ -9,8 +9,9 @@ export default async function handler(req, res) {
 
   const appId = process.env.META_APP_ID || process.env.NEXT_PUBLIC_APP_ID
   const appSecret = process.env.META_APP_SECRET
-  const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI ||
-    `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers.host}/api/auth/callback`
+  const proto = req.headers['x-forwarded-proto'] || 'https'
+  const host = req.headers['x-forwarded-host'] || req.headers.host
+  const redirectUri = `${proto}://${host}/api/auth/callback`
 
   try {
     const tokenRes = await fetch(
